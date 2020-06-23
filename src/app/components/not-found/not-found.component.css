@@ -1,0 +1,10 @@
+:host>div {
+  background-image: url("../../../assets/imgs/background.jpg");
+  background-size: cover;
+  border: 5px solid black;
+}
+
+
+img {
+  height: 800px;
+}

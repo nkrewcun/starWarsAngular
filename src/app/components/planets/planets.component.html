@@ -1,0 +1,21 @@
+<h2>Planètes</h2>
+
+<div>
+  <a class="btn btn-dark" role="button" routerLink="/planets/add">Ajouter une planète</a>
+</div>
+
+<div class="card-deck">
+  <a *ngFor="let planet of planets">
+    <div class="card">
+      <img src="/assets/imgs/planets/{{planet.img}}" class="card-img-top" alt="{{planet.name}}">
+      <div class="card-body">
+        <a [routerLink]="['/planets', planet.id]"><h5 class="card-title">{{planet.name | uppercase}}</h5></a>
+        <a [routerLink]="['/planets/edit', planet.id]" class="btn btn-dark text-white" role="button">Modifier</a>
+        <button class="btn btn-danger" (click)="deletePlanet(planet.id)">Supprimer</button>
+      </div>
+    </div>
+  </a>
+</div>
+<p>
+  {{planets | json}}
+</p>

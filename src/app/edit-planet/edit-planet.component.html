@@ -1,0 +1,52 @@
+<h2>Modifier une planète : </h2>
+<div class="container">
+  <form #planetForm="ngForm" (ngSubmit)="editPlanet()">
+    <div class="form-group">
+
+      <label for="name">Nom</label>
+      <input type="text" class="form-control" id="name" name="name" placeholder="Nom" required
+             [(ngModel)]="planet.name" #name="ngModel"/>
+      <div [hidden]="name.valid" class="alert alert-danger">
+        Le nom de la planète est requis
+      </div>
+
+      <label for="location">Localisation</label>
+      <input type="text" class="form-control" id="location" name="location" placeholder="Localisation" required [(ngModel)]="planet.location"
+             #location="ngModel"/>
+      <div [hidden]="location.valid" class="alert alert-danger">
+        La localisation du vaisseau est requise
+      </div>
+
+      <label for="population">Population (en nombre de personnes)</label>
+      <input type="number" class="form-control" id="population" name="population" required
+             [(ngModel)]="planet.population" #population="ngModel"/>
+      <div [hidden]="population.valid" class="alert alert-danger">
+        La population de la planète est requise
+      </div>
+
+      <label for="diameter">Diamètre (en mètres)</label>
+      <input type="number" class="form-control" id="diameter" name="diameter" required [(ngModel)]="planet.diameter"
+             #diameter="ngModel"/>
+      <div [hidden]="diameter.valid" class="alert alert-danger">
+        La largeur du vaisseau est requise
+      </div>
+
+      <label for="description">Description</label>
+      <textarea class="form-control" id="description" name="description" rows="3" placeholder="Description de la planète" required [(ngModel)]="planet.description"
+                #description="ngModel"></textarea>
+      <div [hidden]="description.valid" class="alert alert-danger">
+        La description de la planète est requise
+      </div>
+
+      <label for="image">Image</label>
+      <input type="text" class="form-control" id="image" name="image" required [(ngModel)]="planet.img"
+             #image="ngModel"/>
+      <div [hidden]="image.valid" class="alert alert-danger">
+        L'image est requise
+      </div>
+    </div>
+
+    <input [disabled]="!planetForm.valid" type="submit"/>
+  </form>
+</div>
+

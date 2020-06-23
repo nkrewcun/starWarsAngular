@@ -1,0 +1,22 @@
+@import url('toastr.css');
+
+app-spaceships h2, app-planets h2 {
+  text-align: center;
+}
+
+.card-deck {
+  justify-content: center;
+}
+
+.card {
+  max-width: 300px;
+}
+
+.card-img-top {
+  height: 280px;
+  object-fit: scale-down;
+}
+
+.card-title {
+  text-align: center;
+}
