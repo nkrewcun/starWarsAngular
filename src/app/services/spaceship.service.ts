@@ -1,5 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Spaceship} from '../models/spaceship';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable, throwError} from 'rxjs';
+import {catchError, retry} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -12,15 +15,30 @@ export class SpaceshipService {
     new Spaceship(3, 'Star Destroyer', 1600, 600, 220, 37000, true, 'stardestroyer.jpg')
   ];
 
-  constructor() {
+  apiUrl = 'http://localhost:3000/spaceships';
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  };
+
+  constructor(private http: HttpClient) {
   }
 
-  getAllSpaceships(): Spaceship[] {
-    return this.spaceships;
+  getAllSpaceships(): Observable<Spaceship[]> {
+    return this.http.get<Spaceship[]>(this.apiUrl, this.httpOptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      );
   }
 
-  getSpaceshipById(id: number): Spaceship {
-    return this.spaceships.find(spaceship => spaceship.id === id);
+  getSpaceshipById(id: number): Observable<Spaceship> {
+    return this.http.get<Spaceship>(this.apiUrl + '/' + id)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      );
   }
 
   addSpaceship(spaceship: Spaceship) {
@@ -34,5 +52,18 @@ export class SpaceshipService {
 
   edit(spaceshipToUpdate: Spaceship): void {
     this.spaceships.filter(spaceship => spaceship === spaceshipToUpdate)[0] = spaceshipToUpdate;
+  }
+
+  handleError(error) {
+    let errorMessage = '';
+    if ( error.error instanceof ErrorEvent ) {
+// Get client-side error
+      errorMessage = error.error.message;
+    } else {
+// Get server-side error
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    window.alert(errorMessage);
+    return throwError(errorMessage);
   }
 }

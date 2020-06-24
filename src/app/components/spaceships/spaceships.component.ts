@@ -18,7 +18,7 @@ export class SpaceshipsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.spaceships = this.spaceshipService.getAllSpaceships();
+    this.spaceshipService.getAllSpaceships().subscribe((data: Spaceship[]) => this.spaceships = data);
     this.loggerService.log();
   }
 

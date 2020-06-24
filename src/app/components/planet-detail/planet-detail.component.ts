@@ -17,7 +17,7 @@ export class PlanetDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = +this.route.snapshot.paramMap.get('id');
-    this.planet = this.planetService.getPlanetById(this.id);
+    this.planetService.getPlanetById(this.id).subscribe((data: Planet) => this.planet = data);
   }
 
 }

@@ -19,7 +19,7 @@ export class EditSpaceshipComponent implements OnInit {
 
   ngOnInit(): void {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.spaceship = this.spaceshipService.getSpaceshipById(id);
+    this.spaceshipService.getSpaceshipById(id).subscribe((data: Spaceship) => this.spaceship = data);
   }
 
   editSpaceship(): void {

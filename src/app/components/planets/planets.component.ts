@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Planet} from '../../models/planet';
 import {PlanetService} from '../../services/planet.service';
 import {LoggerService} from '../../services/logger.service';
@@ -13,10 +13,11 @@ export class PlanetsComponent implements OnInit {
 
   planets: Planet[];
 
-  constructor(private planetService: PlanetService, private loggerService: LoggerService, private toastr: ToastrService) { }
+  constructor(private planetService: PlanetService, private loggerService: LoggerService, private toastr: ToastrService) {
+  }
 
   ngOnInit(): void {
-    this.planets = this.planetService.getAllPlanets();
+    this.planetService.getAllPlanets().subscribe((data: Planet[]) => this.planets = data);
     this.loggerService.log();
   }
 

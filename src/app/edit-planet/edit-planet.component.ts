@@ -13,12 +13,12 @@ export class EditPlanetComponent implements OnInit {
 
   planet: Planet;
 
-  constructor(private route: ActivatedRoute, private planetService: PlanetService, private router: Router, private toastr: ToastrService ) {
+  constructor(private route: ActivatedRoute, private planetService: PlanetService, private router: Router, private toastr: ToastrService) {
   }
 
   ngOnInit(): void {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.planet = this.planetService.getPlanetById(id);
+    this.planetService.getPlanetById(id).subscribe((data: Planet) => this.planet = data);
   }
 
   editPlanet(): void {
