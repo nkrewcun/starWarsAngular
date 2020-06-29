@@ -18,8 +18,8 @@ import {FormsModule} from '@angular/forms';
 
 import { ToastrModule } from 'ngx-toastr';
 import { InitialsPipe } from './pipes/initials.pipe';
-import { EditPlanetComponent } from './edit-planet/edit-planet.component';
-import { EditSpaceshipComponent } from './edit-spaceship/edit-spaceship.component';
+import { EditPlanetComponent } from './components/edit-planet/edit-planet.component';
+import { EditSpaceshipComponent } from './components/edit-spaceship/edit-spaceship.component';
 import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({

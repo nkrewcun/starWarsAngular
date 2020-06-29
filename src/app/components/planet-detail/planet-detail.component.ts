@@ -12,12 +12,17 @@ export class PlanetDetailComponent implements OnInit {
 
   id: number;
   planet: Planet;
+  isLoading: boolean;
 
   constructor(private route: ActivatedRoute, private planetService: PlanetService) { }
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.id = +this.route.snapshot.paramMap.get('id');
-    this.planetService.getPlanetById(this.id).subscribe((data: Planet) => this.planet = data);
+    this.planetService.getPlanetById(this.id).subscribe((data: Planet) => {
+      this.planet = data;
+      this.isLoading = false;
+    });
   }
 
 }

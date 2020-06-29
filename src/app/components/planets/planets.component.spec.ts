@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PlanetsComponent } from './planets.component';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {ToastrModule} from 'ngx-toastr';
 
 describe('PlanetesComponent', () => {
   let component: PlanetsComponent;
@@ -8,7 +10,8 @@ describe('PlanetesComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PlanetsComponent ]
+      declarations: [ PlanetsComponent ],
+      imports: [ HttpClientTestingModule, ToastrModule.forRoot() ]
     })
     .compileComponents();
   }));

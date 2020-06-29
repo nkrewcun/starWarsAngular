@@ -31,14 +31,14 @@
       "img": "stardestroyer.jpg"
     },
     {
+      "id": 4,
       "model": "TIE",
       "length": 7.2,
       "width": 6.7,
       "height": 8.8,
       "population": 1,
       "hasLightspeed": false,
-      "img": "tiefighter.jpg",
-      "id": 4
+      "img": "tiefighter.jpg"
     }
   ],
   "planets": [

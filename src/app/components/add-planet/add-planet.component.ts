@@ -20,8 +20,9 @@ export class AddPlanetComponent implements OnInit {
   }
 
   submitPlanet() {
-    this.planetService.addPlanet(this.planet);
-    this.router.navigate(['/planets']);
+    this.planetService.addPlanet(this.planet).subscribe(then => {
+      this.router.navigate(['/planets']);
+    });
     this.showSuccess();
   }
 

@@ -12,18 +12,30 @@ import {ToastrService} from 'ngx-toastr';
 export class SpaceshipsComponent implements OnInit {
 
   spaceships: Spaceship[];
+  isLoading: boolean;
 
   constructor(private spaceshipService: SpaceshipService, private loggerService: LoggerService, private toastr: ToastrService) {
 
   }
 
   ngOnInit(): void {
-    this.spaceshipService.getAllSpaceships().subscribe((data: Spaceship[]) => this.spaceships = data);
+    this.isLoading = true;
+    this.spaceshipService.getAllSpaceships().subscribe((data: Spaceship[]) => {
+      this.spaceships = data;
+      this.isLoading = false;
+    });
     this.loggerService.log();
   }
 
   deleteSpaceship(id: number) {
-    this.spaceships = this.spaceshipService.removeById(id);
+    this.isLoading = true;
+    const deleteSpaceshipName = this.spaceships.find(spaceship => spaceship.id === id).model;
+    this.spaceshipService.removeById(id).subscribe(then => {
+      this.spaceshipService.getAllSpaceships().subscribe((data: Spaceship[]) => {
+        this.spaceships = data;
+        this.isLoading = false;
+      });
+    });
     this.toastr.error('Votre vaisseau a bien été supprimé', 'Succès !', {positionClass: 'toast-top-center'});
   }
 }

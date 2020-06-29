@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EditSpaceshipComponent } from './edit-spaceship.component';
+import {RouterTestingModule} from '@angular/router/testing';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {FormsModule} from '@angular/forms';
+import {ToastrModule} from 'ngx-toastr';
 
 describe('EditSpaceshipComponent', () => {
   let component: EditSpaceshipComponent;
@@ -8,7 +12,8 @@ describe('EditSpaceshipComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EditSpaceshipComponent ]
+      declarations: [ EditSpaceshipComponent ],
+      imports: [ RouterTestingModule, HttpClientTestingModule, FormsModule, ToastrModule.forRoot()]
     })
     .compileComponents();
   }));

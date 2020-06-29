@@ -18,8 +18,9 @@ export class AddSpaceshipComponent implements OnInit {
   }
 
   submitSpaceship() {
-    this.spaceshipService.addSpaceship(this.spaceship);
-    this.router.navigate(['/spaceships']);
+    this.spaceshipService.addSpaceship(this.spaceship).subscribe(then => {
+      this.router.navigate(['/spaceships']);
+    });
     this.showSuccess();
   }
 

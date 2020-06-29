@@ -41,17 +41,26 @@ export class SpaceshipService {
       );
   }
 
-  addSpaceship(spaceship: Spaceship) {
-    this.spaceships.push(spaceship);
+  addSpaceship(spaceship: Spaceship): Observable<Spaceship> {
+    return this.http.post<Spaceship>(this.apiUrl, spaceship, this.httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
-  removeById(id: number): Spaceship[] {
-    this.spaceships = this.spaceships.filter(spaceship => spaceship.id !== id);
-    return this.spaceships;
+  removeById(id: number): Observable<Spaceship> {
+    return this.http.delete<Spaceship>(this.apiUrl + '/' + id, this.httpOptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      );
   }
 
-  edit(spaceshipToUpdate: Spaceship): void {
-    this.spaceships.filter(spaceship => spaceship === spaceshipToUpdate)[0] = spaceshipToUpdate;
+  edit(spaceshipToUpdate: Spaceship): Observable<Spaceship> {
+    return this.http.put<Spaceship>(this.apiUrl + '/' + spaceshipToUpdate.id, spaceshipToUpdate, this.httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
   handleError(error) {

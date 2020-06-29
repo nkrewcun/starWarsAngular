@@ -11,13 +11,18 @@ import {Spaceship} from '../../models/spaceship';
 export class SpaceshipDetailComponent implements OnInit {
   id: number;
   spaceship: Spaceship;
+  isLoading: boolean;
 
   constructor(private route: ActivatedRoute, private spaceshipService: SpaceshipService) {
   }
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.id = +this.route.snapshot.paramMap.get('id');
-    this.spaceshipService.getSpaceshipById(this.id).subscribe((data: Spaceship) => this.spaceship = data);
+    this.spaceshipService.getSpaceshipById(this.id).subscribe((data: Spaceship) => {
+      this.spaceship = data;
+      this.isLoading = false;
+    });
   }
 
 }

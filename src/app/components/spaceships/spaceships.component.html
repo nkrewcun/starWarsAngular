@@ -4,18 +4,21 @@
   <a class="btn btn-dark" role="button" routerLink="/spaceships/add">Ajouter un vaisseau</a>
 </div>
 
-<div class="card-deck">
-  <a *ngFor="let spaceship of spaceships">
-    <div class="card">
-      <img src="/assets/imgs/spaceships/{{spaceship.img}}" class="card-img-top" alt="{{spaceship.model}}">
-      <div class="card-body">
-        <a [routerLink]="['/spaceships', spaceship.id]"><h5 class="card-title">{{spaceship.model | uppercase}}</h5></a>
-        <a [routerLink]="['/spaceships/edit', spaceship.id]" class="btn btn-dark text-white" role="button">Modifier</a>
-        <button class="btn btn-danger" (click)="deleteSpaceship(spaceship.id)">Supprimer</button>
-      </div>
+<div *ngIf="!isLoading" class="card-deck">
+  <div *ngFor="let spaceship of spaceships" class="card">
+    <img src="/assets/imgs/spaceships/{{spaceship.img}}" class="card-img-top" alt="{{spaceship.model}}">
+    <div class="card-body">
+      <a [routerLink]="['/spaceships', spaceship.id]"><h5 class="card-title">{{spaceship.model | uppercase}}</h5></a>
+      <a [routerLink]="['/spaceships/edit', spaceship.id]" class="btn btn-dark text-white" role="button">Modifier</a>
+      <button class="btn btn-danger" (click)="deleteSpaceship(spaceship.id)">Supprimer</button>
     </div>
-  </a>
+  </div>
 </div>
-<p>
+<p *ngIf="!isLoading">
   {{spaceships | json}}
 </p>
+<div class="text-center" *ngIf="isLoading">
+  <div class="spinner-border text-danger" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>

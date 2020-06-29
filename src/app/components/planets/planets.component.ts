@@ -12,17 +12,28 @@ import {ToastrService} from 'ngx-toastr';
 export class PlanetsComponent implements OnInit {
 
   planets: Planet[];
+  isLoading: boolean;
 
   constructor(private planetService: PlanetService, private loggerService: LoggerService, private toastr: ToastrService) {
   }
 
   ngOnInit(): void {
-    this.planetService.getAllPlanets().subscribe((data: Planet[]) => this.planets = data);
+    this.isLoading = true;
+    this.planetService.getAllPlanets().subscribe((data: Planet[]) => {
+      this.planets = data;
+      this.isLoading = false;
+    });
     this.loggerService.log();
   }
 
   deletePlanet(id: number) {
-    this.planets = this.planetService.removeById(id);
+    this.isLoading = true;
+    this.planetService.removeById(id).subscribe(then => {
+      this.planetService.getAllPlanets().subscribe((data: Planet[]) => {
+        this.planets = data;
+        this.isLoading = false;
+      });
+    });
     this.toastr.error('Votre planète a bien été supprimée', 'Succès !', {positionClass: 'toast-top-center'});
   }
 }

@@ -2,14 +2,6 @@
 <div class="container">
   <form #spaceshipForm="ngForm" (ngSubmit)="submitSpaceship()">
     <div class="form-group">
-
-      <label for="id">Id</label>
-      <input type="number" class="form-control" id="id" name="id" placeholder="Identifiant" required
-             [(ngModel)]="spaceship.id" #id="ngModel"/>
-      <div [hidden]="id.valid" class="alert alert-danger">
-        L'identifiant du vaisseau est requis
-      </div>
-
       <label for="model">Modèle</label>
       <input type="text" class="form-control" id="model" name="model" placeholder="Modèle" required
              [(ngModel)]="spaceship.model" #model="ngModel"/>

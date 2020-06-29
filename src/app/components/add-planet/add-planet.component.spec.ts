@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AddPlanetComponent } from './add-planet.component';
+import {RouterTestingModule} from '@angular/router/testing';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {ToastrModule, ToastrService} from 'ngx-toastr';
+import {FormsModule} from '@angular/forms';
 
 describe('AddPlanetComponent', () => {
   let component: AddPlanetComponent;
@@ -8,7 +12,9 @@ describe('AddPlanetComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddPlanetComponent ]
+      declarations: [ AddPlanetComponent ],
+      imports: [ RouterTestingModule, HttpClientTestingModule, ToastrModule.forRoot(), FormsModule ],
+      providers: [ ToastrService ]
     })
     .compileComponents();
   }));

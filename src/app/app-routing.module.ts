@@ -8,8 +8,8 @@ import {SpaceshipDetailComponent} from './components/spaceship-detail/spaceship-
 import {NotFoundComponent} from './components/not-found/not-found.component';
 import {AddPlanetComponent} from './components/add-planet/add-planet.component';
 import {AddSpaceshipComponent} from './components/add-spaceship/add-spaceship.component';
-import {EditPlanetComponent} from './edit-planet/edit-planet.component';
-import {EditSpaceshipComponent} from './edit-spaceship/edit-spaceship.component';
+import {EditPlanetComponent} from './components/edit-planet/edit-planet.component';
+import {EditSpaceshipComponent} from './components/edit-spaceship/edit-spaceship.component';
 
 
 const routes: Routes = [

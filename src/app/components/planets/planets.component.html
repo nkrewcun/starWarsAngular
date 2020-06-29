@@ -4,18 +4,21 @@
   <a class="btn btn-dark" role="button" routerLink="/planets/add">Ajouter une planète</a>
 </div>
 
-<div class="card-deck">
-  <a *ngFor="let planet of planets">
-    <div class="card">
-      <img src="/assets/imgs/planets/{{planet.img}}" class="card-img-top" alt="{{planet.name}}">
-      <div class="card-body">
-        <a [routerLink]="['/planets', planet.id]"><h5 class="card-title">{{planet.name | uppercase}}</h5></a>
-        <a [routerLink]="['/planets/edit', planet.id]" class="btn btn-dark text-white" role="button">Modifier</a>
-        <button class="btn btn-danger" (click)="deletePlanet(planet.id)">Supprimer</button>
-      </div>
+<div *ngIf="!isLoading" class="card-deck">
+  <div *ngFor="let planet of planets" class="card">
+    <img src="/assets/imgs/planets/{{planet.img}}" class="card-img-top" alt="{{planet.name}}">
+    <div class="card-body">
+      <a [routerLink]="['/planets', planet.id]"><h5 class="card-title">{{planet.name | uppercase}}</h5></a>
+      <a [routerLink]="['/planets/edit', planet.id]" class="btn btn-dark text-white" role="button">Modifier</a>
+      <button class="btn btn-danger" (click)="deletePlanet(planet.id)">Supprimer</button>
     </div>
-  </a>
+  </div>
 </div>
-<p>
+<p *ngIf="!isLoading">
   {{planets | json}}
 </p>
+<div class="text-center" *ngIf="isLoading">
+  <div class="spinner-border text-danger" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>

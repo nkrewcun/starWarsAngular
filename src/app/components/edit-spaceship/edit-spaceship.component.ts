@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Spaceship} from '../models/spaceship';
+import {Spaceship} from '../../models/spaceship';
 import {ActivatedRoute, Router} from '@angular/router';
-import {SpaceshipService} from '../services/spaceship.service';
+import {SpaceshipService} from '../../services/spaceship.service';
 import {ToastrService} from 'ngx-toastr';
 
 @Component({
@@ -11,7 +11,7 @@ import {ToastrService} from 'ngx-toastr';
 })
 export class EditSpaceshipComponent implements OnInit {
 
-  spaceship: Spaceship;
+  spaceship = new Spaceship();
 
   // tslint:disable-next-line:max-line-length
   constructor(private route: ActivatedRoute, private spaceshipService: SpaceshipService, private router: Router, private toastr: ToastrService) {
@@ -23,8 +23,9 @@ export class EditSpaceshipComponent implements OnInit {
   }
 
   editSpaceship(): void {
-    this.spaceshipService.edit(this.spaceship);
-    this.router.navigate(['/spaceships', this.spaceship.id]);
+    this.spaceshipService.edit(this.spaceship).subscribe(then => {
+      this.router.navigate(['/spaceships', this.spaceship.id]);
+    });
     this.toastr.info('Votre vaisseau a bien été modifié', 'Succès !', {positionClass: 'toast-top-center'});
   }
 }
